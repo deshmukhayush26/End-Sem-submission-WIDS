@@ -1,0 +1,83 @@
+The analysis is performed on the Canada Vehicle CO₂ Emissions dataset sourced from Kaggle.
+
+1. Two models are implemented and compared:
+i. Linear Regression
+ii. Ridge Regression
+The goal is to understand how vehicle characteristics influence emissions and to evaluate whether regularization improves model performance.
+
+2. Dataset Description
+Source: Kaggle – CO₂ Emission by Vehicles (Canada)
+File Used: CO2 Emissions_Canada.csv
+The dataset contains vehicle-level information such as: Engine size, Cylinders, Fuel consumption (city, highway, combined), Vehicle class, Fuel type, Manufacturer, CO₂ emissions (target variable)
+The dataset includes categorical and numerical features, making it suitable for regression with feature encoding.
+
+3. Environment & Tools
+Platform: Kaggle Notebook
+Language: Python
+
+4. Libraries Used:
+numpy – numerical operations
+pandas – data handling
+scikit-learn – modeling and evaluation
+matplotlib – visualization
+
+5. Data Preprocessing
+Dataset Loading
+The dataset is loaded directly from Kaggle’s input directory.
+One-Hot Encoding
+Categorical variables are encoded using pd.get_dummies():
+Make, Vehicle Class, Fuel Type
+drop_first=True is used to avoid multicollinearity.
+Feature Selection
+Dropped columns: Model, Transmission, Fuel consumption columns
+Target column: (CO2 Emissions(g/km))
+Remaining features are used as predictors (X).
+Target Variable: CO2 Emissions(g/km) is selected as the target (y).
+
+6. Train-Test Split
+The dataset is split into: 70% Training data, 30% Testing data
+train_test_split(test_size=0.3, random_state=67)
+The fixed random state ensures reproducibility.
+
+7. Models Implemented
+i. Linear Regression
+Assumes a linear relationship between features and CO₂ emissions.
+Model is trained using ordinary least squares.
+Evaluation metrics: R² Score, Root Mean Squared Error (RMSE)
+ii. Ridge Regression
+A regularized version of linear regression.
+Adds a penalty term to reduce overfitting.
+Regularization strength:alpha = 1.0
+Uses the same evaluation metrics as linear regression.
+Model Evaluation Metrics: 
+R² Score: Measures how much variance in CO₂ emissions is explained by the model.
+RMSE: Measures average prediction error in g/km.
+Higher R² and lower RMSE indicate better model performance.
+
+8.Visualizations
+Two scatter plots are generated:
+i. Linear Regression Plot
+X-axis: Actual CO₂ emissions
+Y-axis: Predicted CO₂ emissions
+A diagonal reference line represents perfect prediction.
+
+ii. Ridge Regression Plot
+Same structure as linear regression plot.
+Used to visually compare prediction spread and accuracy.
+
+These plots help assess:
+Prediction accuracy
+Presence of bias
+Spread of errors
+
+9. Results & Observations
+Linear regression provides a strong baseline for CO₂ prediction.
+Ridge regression stabilizes predictions by reducing coefficient variance.
+Both models show a strong correlation between actual and predicted emissions.
+Ridge regression is particularly useful when dealing with many correlated features created by one-hot encoding.
+
+10. How to Run the Code
+Open a Kaggle Notebook
+Add the CO₂ Emissions Canada dataset to the notebook
+Copy and run the code cells sequentially
+Observe printed evaluation metrics and generated plots
